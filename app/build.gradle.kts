@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.picodiploma.coursestory"
+    namespace = "com.submision.coursestory"
     compileSdk = 33
 
     defaultConfig {
-        applicationId = "com.picodiploma.coursestory"
+        applicationId = "com.submision.coursestory"
         minSdk = 21
         targetSdk = 33
         versionCode = 1
