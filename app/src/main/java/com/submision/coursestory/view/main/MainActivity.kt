@@ -14,6 +14,7 @@ import com.submision.coursestory.data.pref.dataStore
 import com.submision.coursestory.databinding.ActivityMainBinding
 import com.submision.coursestory.view.welcome.WelcomeActivity
 import com.submision.coursestory.data.response.ListStoryItem
+import com.submision.coursestory.view.detail.DetailStoryActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -73,6 +74,9 @@ class MainActivity : AppCompatActivity() {
     private fun onStoryClick(story: ListStoryItem) {
         // Handle the click event, for example, navigate to a detail page
         Toast.makeText(this, "Clicked on: ${story.name}", Toast.LENGTH_SHORT).show()
+        val intent = Intent(this, DetailStoryActivity::class.java)
+        intent.putExtra("story_id", story.id)  // Mengirimkan object story
+        startActivity(intent)
     }
 
     private fun setupView() {

@@ -28,6 +28,14 @@ class UserRepository private constructor(
         return apiService.getStories("Bearer $token")
     }
 
+    suspend fun getDetailStory(storyId: String) = try {
+        val token = userPreference.getSession().first().token
+        apiService.getDetailStory("Bearer $token", storyId)
+    } catch (e: HttpException) {
+        Log.e("UserRepository", "getDetailStory: ${e.message()}")
+        null
+    }
+
     suspend fun saveSession(user: com.submision.coursestory.data.pref.UserModel) {
         userPreference.saveSession(user)
     }

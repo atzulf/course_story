@@ -36,4 +36,4 @@ data class ListStoryItem(
 
 	@field:SerializedName("lat")
 	val lat: Any? = null
-)
+) : java.io.Serializable

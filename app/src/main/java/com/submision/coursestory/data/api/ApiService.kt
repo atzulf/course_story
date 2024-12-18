@@ -1,13 +1,16 @@
 package com.submision.coursestory.data.api
 
 import com.submision.coursestory.data.response.AllStoriesResponse
+import com.submision.coursestory.data.response.DetailStoriesResponse
 import com.submision.coursestory.data.response.LoginResponse
 import com.submision.coursestory.data.response.RegisterResponse
+import retrofit2.Response
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
+import retrofit2.http.Path
 
 interface ApiService {
     @FormUrlEncoded
@@ -29,4 +32,10 @@ interface ApiService {
     suspend fun getStories(
         @Header("Authorization") token: String
     ): AllStoriesResponse
+
+    @GET("stories/{id}")
+    suspend fun getDetailStory(
+        @Header("Authorization") token: String,
+        @Path("id") storyId: String
+    ): DetailStoriesResponse
 }

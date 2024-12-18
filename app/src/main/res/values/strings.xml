@@ -18,4 +18,5 @@
     <string name="name_error">isikan nama dengan benar</string>
     <string name="add_icon">add\n</string>
     <string name="title_description">deskripsi</string>
+    <string name="imagedetail">deskipsi foto</string>
 </resources>
