@@ -1,8 +1,11 @@
 package com.submision.coursestory.data
 
+import android.util.Log
 import com.google.gson.Gson
 import com.submision.coursestory.data.api.ApiService
+import com.submision.coursestory.data.pref.UserModel
 import com.submision.coursestory.data.pref.UserPreference
+import com.submision.coursestory.data.response.LoginResponse
 import kotlinx.coroutines.flow.Flow
 import retrofit2.HttpException
 
@@ -19,6 +22,31 @@ class UserRepository private constructor(
             val jsonInString = e.response()?.errorBody()?.string()
             val errorBody = Gson().fromJson(jsonInString, ErrorResponse::class.java)
             errorBody.message ?: "Ada sedikit error"
+        }
+    }
+
+    suspend fun login(email: String, password: String): LoginResponse {
+        Log.d("UserRepository", "Login initiated for email: $email")
+        return try {
+            val response = apiService.login(email, password)
+            if (response.error == false) {
+                val loginResult = response.loginResult!!
+                val userModel = UserModel(
+                    email = email,
+                    token = loginResult.token!!,
+                    isLogin = true
+                )
+                Log.d("UserRepository", "Login successful for email: $email")
+                saveSession(userModel)
+            } else {
+                Log.d("UserRepository", "Login failed: ${response.message}")
+            }
+            response
+        } catch (e: HttpException) {
+            val errorBody = e.response()?.errorBody()?.string()
+            val errorMessage = Gson().fromJson(errorBody, ErrorResponse::class.java).message
+            Log.e("UserRepository", "Login error: $errorMessage", e)
+            throw Exception(errorMessage ?: "An error occurred")
         }
     }
 
