@@ -1,4 +1,4 @@
-package com.submision.coursestory.data
+package com.submision.coursestory.data.response
 
 import com.google.gson.annotations.SerializedName
 
