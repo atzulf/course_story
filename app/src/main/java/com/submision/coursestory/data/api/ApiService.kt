@@ -1,5 +1,6 @@
 package com.submision.coursestory.data.api
 
+import com.submision.coursestory.data.response.LoginResponse
 import com.submision.coursestory.data.response.RegisterResponse
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
@@ -13,4 +14,12 @@ interface ApiService {
         @Field("email") email: String,
         @Field("password") password: String
     ): RegisterResponse
+
+    @FormUrlEncoded
+    @POST("login")
+    suspend fun login(
+        @Field("email") email: String,
+        @Field("password") password: String
+    ): LoginResponse
+    
 }
