@@ -8,9 +8,11 @@ import android.view.WindowManager
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import com.submision.coursestory.R
 import com.submision.coursestory.databinding.ActivityLoginBinding
 import com.submision.coursestory.view.main.MainActivity
+import kotlinx.coroutines.launch
 
 class LoginActivity : AppCompatActivity() {
     private val viewModel by viewModels<LoginViewModel> {
@@ -42,33 +44,68 @@ class LoginActivity : AppCompatActivity() {
 
     private fun setupAction() {
         binding.loginButton.setOnClickListener {
-            val email = binding.edLoginEmail.text.toString()
-            viewModel.saveSession(
-                com.submision.coursestory.data.pref.UserModel(
-                    email,
-                    "sample_token"
-                )
-            )
-            val password = binding.edLoginPassword.text.toString()
+            val email = binding.edLoginEmail.text.toString().trim()
+            val password = binding.edLoginPassword.text.toString().trim()
+
+            // Validasi input email dan password
+            if (email.isEmpty()) {
+                binding.edLoginEmail.error = getString(R.string.email_error)
+                return@setOnClickListener
+            }
 
             if (password.isEmpty() || password.length < 8) {
                 binding.edLoginPassword.error = getString(R.string.password_error)
                 return@setOnClickListener
             }
 
-            AlertDialog.Builder(this).apply {
-                setTitle("Yeah!")
-                setMessage("Anda berhasil login. Sudah tidak sabar untuk belajar ya?")
-                setPositiveButton("Lanjut") { _, _ ->
-                    val intent = Intent(context, MainActivity::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-                    startActivity(intent)
-                    finish()
+            // Tampilkan indikator loading saat proses login
+            binding.progressBar.visibility = android.view.View.VISIBLE
+
+            // Memulai proses login
+            lifecycleScope.launch {
+                viewModel.login(email, password)
+            }
+
+            // Mengamati perubahan status loginState
+            lifecycleScope.launch {
+                viewModel.loginState.collect { state ->
+                    when (state) {
+                        is com.submision.coursestory.data.Result.Loading -> {
+                            // Menampilkan progress bar saat login sedang berlangsung
+                            binding.progressBar.visibility = android.view.View.VISIBLE
+                        }
+                        is com.submision.coursestory.data.Result.Success -> {
+                            // Sembunyikan progress bar dan tampilkan dialog sukses
+                            binding.progressBar.visibility = android.view.View.GONE
+                            AlertDialog.Builder(this@LoginActivity).apply {
+                                setTitle("Yeah!")
+                                setMessage("Anda berhasil login. Sudah tidak sabar untuk belajar ya?")
+                                setPositiveButton("Lanjut") { _, _ ->
+                                    val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                                    intent.flags =
+                                        Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                                    startActivity(intent)
+                                    finish()
+                                }
+                                create()
+                                show()
+                            }
+                        }
+                        is com.submision.coursestory.data.Result.Error -> {
+                            // Sembunyikan progress bar dan tampilkan dialog error
+                            binding.progressBar.visibility = android.view.View.GONE
+                            AlertDialog.Builder(this@LoginActivity).apply {
+                                setTitle("Oops!")
+                                setPositiveButton("Coba Lagi") { dialog, _ ->
+                                    dialog.dismiss()
+                                }
+                                create()
+                                show()
+                            }
+                        }
+                    }
                 }
-                create()
-                show()
             }
         }
     }
-
 }

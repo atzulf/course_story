@@ -13,6 +13,7 @@ import com.google.android.material.textfield.TextInputLayout
 import com.submision.coursestory.R
 
 class SignupActivity : AppCompatActivity() {
+
     private lateinit var binding: ActivitySignupBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
