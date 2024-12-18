@@ -14,53 +14,12 @@ class UserRepository private constructor(
     private val userPreference: UserPreference
 ) {
 
-    suspend fun register(name: String, email: String, password: String): String {
-        return try {
-            val response = apiService.register(name, email, password)
-            response.message ?: "Registration successful"
-        } catch (e: HttpException) {
-            val jsonInString = e.response()?.errorBody()?.string()
-            val errorBody = Gson().fromJson(jsonInString, ErrorResponse::class.java)
-            errorBody.message ?: "Ada sedikit error"
-        }
-    }
+    suspend fun register(name: String, email: String, password: String) =
+        apiService.register(name, email, password)
 
     suspend fun login(email: String, password: String): LoginResponse {
-        Log.d("UserRepository", "Login initiated for email: $email")
-        return try {
-            val response = apiService.login(email, password)
-            if (response.error == false && response.loginResult != null) {
-                val loginResult = response.loginResult
-                val userModel = UserModel(
-                    email = email,
-                    token = loginResult.token!!,
-                    isLogin = true
-                )
-                saveSession(userModel)
-                Log.d("UserRepository", "Login successful for email: $email")
-            } else {
-                // Tangani jika login gagal karena error atau response kosong
-                throw Exception(response.message ?: "Login failed, please check your credentials")
-            }
-            response
-        } catch (e: HttpException) {
-            // Tangani error jika server mengirim status 401 Unauthorized
-            val errorBody = e.response()?.errorBody()?.string()
-            val errorMessage = try {
-                Gson().fromJson(errorBody, ErrorResponse::class.java).message
-            } catch (ex: Exception) {
-                "Invalid credentials or server error"
-            }
-            Log.e("UserRepository", "Login error: $errorMessage", e)
-            throw Exception(errorMessage ?: "Login failed")
-        } catch (e: Exception) {
-            Log.e("UserRepository", "Unexpected error during login", e)
-            throw Exception("Unexpected error: ${e.localizedMessage}")
-        }
+        return apiService.login(email, password)
     }
-
-
-
 
     suspend fun saveSession(user: com.submision.coursestory.data.pref.UserModel) {
         userPreference.saveSession(user)
