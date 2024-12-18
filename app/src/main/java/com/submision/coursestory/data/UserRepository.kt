@@ -5,8 +5,10 @@ import com.google.gson.Gson
 import com.submision.coursestory.data.api.ApiService
 import com.submision.coursestory.data.pref.UserModel
 import com.submision.coursestory.data.pref.UserPreference
+import com.submision.coursestory.data.response.AllStoriesResponse
 import com.submision.coursestory.data.response.LoginResponse
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.first
 import retrofit2.HttpException
 
 class UserRepository private constructor(
@@ -19,6 +21,11 @@ class UserRepository private constructor(
 
     suspend fun login(email: String, password: String): LoginResponse {
         return apiService.login(email, password)
+    }
+
+    suspend fun getStories(): AllStoriesResponse {
+        val token = userPreference.getSession().first().token
+        return apiService.getStories("Bearer $token")
     }
 
     suspend fun saveSession(user: com.submision.coursestory.data.pref.UserModel) {

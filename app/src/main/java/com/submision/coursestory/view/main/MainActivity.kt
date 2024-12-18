@@ -7,10 +7,13 @@ import android.view.WindowInsets
 import android.view.WindowManager
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.submision.coursestory.data.pref.UserPreference
+import com.submision.coursestory.data.pref.dataStore
 import com.submision.coursestory.databinding.ActivityMainBinding
 import com.submision.coursestory.view.welcome.WelcomeActivity
 
 class MainActivity : AppCompatActivity() {
+private val userPreference by lazy { UserPreference.getInstance(dataStore) }
     private val viewModel by viewModels<MainViewModel> {
         com.submision.coursestory.view.ViewModelFactory.getInstance(this)
     }
