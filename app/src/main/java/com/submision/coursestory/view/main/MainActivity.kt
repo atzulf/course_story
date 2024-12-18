@@ -5,25 +5,34 @@ import android.os.Build
 import android.os.Bundle
 import android.view.WindowInsets
 import android.view.WindowManager
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.submision.coursestory.data.pref.UserPreference
 import com.submision.coursestory.data.pref.dataStore
 import com.submision.coursestory.databinding.ActivityMainBinding
 import com.submision.coursestory.view.welcome.WelcomeActivity
+import com.submision.coursestory.data.response.ListStoryItem
 
 class MainActivity : AppCompatActivity() {
-private val userPreference by lazy { UserPreference.getInstance(dataStore) }
+
+    private val userPreference by lazy { UserPreference.getInstance(dataStore) }
     private val viewModel by viewModels<MainViewModel> {
         com.submision.coursestory.view.ViewModelFactory.getInstance(this)
     }
     private lateinit var binding: ActivityMainBinding
+    private lateinit var storyAdapter: StoryAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Inisialisasi RecyclerView dan Adapter dengan onItemClick
+        setupRecyclerView()
+
+        // Observasi sesi pengguna
         viewModel.getSession().observe(this) { user ->
             if (!user.isLogin) {
                 startActivity(Intent(this, WelcomeActivity::class.java))
@@ -31,8 +40,39 @@ private val userPreference by lazy { UserPreference.getInstance(dataStore) }
             }
         }
 
+        // Observasi data cerita
+        observeStories()
+
+        // Mengatur tampilan dan aksi tombol logout
         setupView()
         setupAction()
+
+        // Memuat cerita dari ViewModel
+        viewModel.fetchStories()
+    }
+
+    private fun setupRecyclerView() {
+        storyAdapter = StoryAdapter { story -> onStoryClick(story) }
+        binding.rvStories.apply {
+            layoutManager = LinearLayoutManager(this@MainActivity)
+            adapter = storyAdapter
+            setHasFixedSize(true)
+        }
+    }
+
+    private fun observeStories() {
+        viewModel.stories.observe(this) { stories ->
+            if (stories.isNotEmpty()) {
+                storyAdapter.submitList(stories)
+            } else {
+                Toast.makeText(this, "No stories available", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun onStoryClick(story: ListStoryItem) {
+        // Handle the click event, for example, navigate to a detail page
+        Toast.makeText(this, "Clicked on: ${story.name}", Toast.LENGTH_SHORT).show()
     }
 
     private fun setupView() {
@@ -51,7 +91,7 @@ private val userPreference by lazy { UserPreference.getInstance(dataStore) }
     private fun setupAction() {
         binding.logoutButton.setOnClickListener {
             viewModel.logout()
+            Toast.makeText(this, "Logged out successfully", Toast.LENGTH_SHORT).show()
         }
     }
-
 }
