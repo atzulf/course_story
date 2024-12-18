@@ -29,26 +29,38 @@ class UserRepository private constructor(
         Log.d("UserRepository", "Login initiated for email: $email")
         return try {
             val response = apiService.login(email, password)
-            if (response.error == false) {
-                val loginResult = response.loginResult!!
+            if (response.error == false && response.loginResult != null) {
+                val loginResult = response.loginResult
                 val userModel = UserModel(
                     email = email,
                     token = loginResult.token!!,
                     isLogin = true
                 )
-                Log.d("UserRepository", "Login successful for email: $email")
                 saveSession(userModel)
+                Log.d("UserRepository", "Login successful for email: $email")
             } else {
-                Log.d("UserRepository", "Login failed: ${response.message}")
+                // Tangani jika login gagal karena error atau response kosong
+                throw Exception(response.message ?: "Login failed, please check your credentials")
             }
             response
         } catch (e: HttpException) {
+            // Tangani error jika server mengirim status 401 Unauthorized
             val errorBody = e.response()?.errorBody()?.string()
-            val errorMessage = Gson().fromJson(errorBody, ErrorResponse::class.java).message
+            val errorMessage = try {
+                Gson().fromJson(errorBody, ErrorResponse::class.java).message
+            } catch (ex: Exception) {
+                "Invalid credentials or server error"
+            }
             Log.e("UserRepository", "Login error: $errorMessage", e)
-            throw Exception(errorMessage ?: "An error occurred")
+            throw Exception(errorMessage ?: "Login failed")
+        } catch (e: Exception) {
+            Log.e("UserRepository", "Unexpected error during login", e)
+            throw Exception("Unexpected error: ${e.localizedMessage}")
         }
     }
+
+
+
 
     suspend fun saveSession(user: com.submision.coursestory.data.pref.UserModel) {
         userPreference.saveSession(user)

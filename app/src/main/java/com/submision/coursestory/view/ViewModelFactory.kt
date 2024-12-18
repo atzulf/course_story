@@ -7,6 +7,7 @@ import com.submision.coursestory.data.UserRepository
 import com.submision.coursestory.di.Injection
 import com.submision.coursestory.view.login.LoginViewModel
 import com.submision.coursestory.view.main.MainViewModel
+import com.submision.coursestory.view.signup.SignUpViewModel
 
 class ViewModelFactory(private val repository: UserRepository) : ViewModelProvider.NewInstanceFactory() {
 
@@ -18,6 +19,9 @@ class ViewModelFactory(private val repository: UserRepository) : ViewModelProvid
             }
             modelClass.isAssignableFrom(LoginViewModel::class.java) -> {
                 LoginViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(SignUpViewModel::class.java) -> {
+                SignUpViewModel(repository) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }
