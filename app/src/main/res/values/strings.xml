@@ -16,5 +16,5 @@
     <string name="password_error">Password harus lebih dari 8 karaker atau huruf</string>
     <string name="email_error">Isikan format email dengan benar</string>
     <string name="name_error">isikan nama dengan benar</string>
-
+    <string name="add_icon">add\n</string>
 </resources>
