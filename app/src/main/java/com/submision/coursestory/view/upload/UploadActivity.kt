@@ -30,7 +30,9 @@ class UploadActivity : AppCompatActivity() {
     }
 
     private fun startGallery() {
-        launcherGallery.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+        launcherGallery.launch(PickVisualMediaRequest(
+            ActivityResultContracts.PickVisualMedia.ImageOnly)
+        )
     }
 
     private val launcherGallery = registerForActivityResult(
@@ -46,13 +48,15 @@ class UploadActivity : AppCompatActivity() {
 
     private fun startCamera() {
         currentImageUri = getImageUri(this)
-        cameraLaunch.launch(currentImageUri!!)
+        launcherIntentCamera.launch(currentImageUri!!)
     }
 
-    private val cameraLaunch = registerForActivityResult(ActivityResultContracts.TakePicture()) { success ->
-        if (success) {
+    private val launcherIntentCamera = registerForActivityResult(
+        ActivityResultContracts.TakePicture()
+    ) { isSuccess ->
+        if (isSuccess) {
             showImage()
-        }else{
+        } else {
             currentImageUri = null
         }
     }
