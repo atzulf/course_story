@@ -1,12 +1,20 @@
 package com.submision.coursestory.data.repository
 
 import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.liveData
+import com.google.gson.Gson
 import com.submision.coursestory.data.api.ApiService
 import com.submision.coursestory.data.pref.UserPreference
 import com.submision.coursestory.data.response.AllStoriesResponse
+import com.submision.coursestory.data.response.ErrorResponse
 import com.submision.coursestory.data.response.LoginResponse
+import com.submision.coursestory.data.response.UploadResponse
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
+import okhttp3.MultipartBody
+import com.submision.coursestory.data.result.Result
+import okhttp3.RequestBody
 import retrofit2.HttpException
 
 class UserRepository private constructor(
@@ -32,6 +40,20 @@ class UserRepository private constructor(
     } catch (e: HttpException) {
         Log.e("UserRepository", "getDetailStory: ${e.message()}")
         null
+    }
+
+    fun uploadStory(file : MultipartBody.Part, description: RequestBody): LiveData<Result<UploadResponse>> = liveData{
+        emit(Result.Loading)
+        try{
+            val token = userPreference.getSession().first().token
+            val response = apiService.uploadStory("Bearer $token",file,description)
+            emit(Result.Success(response))
+        }catch (e: HttpException) {
+            val jsonInString = e.response()?.errorBody()?.string()
+            val errorBody = Gson().fromJson(jsonInString, ErrorResponse::class.java)
+            val errorMessage = errorBody.message
+            emit(Result.Error(errorMessage.toString()))
+        }
     }
 
     suspend fun saveSession(user: com.submision.coursestory.data.pref.UserModel) {
