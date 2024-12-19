@@ -18,5 +18,9 @@
     <string name="name_error">isikan nama dengan benar</string>
     <string name="add_icon">add\n</string>
     <string name="title_description">deskripsi</string>
-    <string name="imagedetail">deskipsi foto</string>
+    <string name="imagedetail">foto</string>
+    <string name="camera">Upload Kamera</string>
+    <string name="gallery">Upload Galeri</string>
+    <string name="description">Tambahkan Deskripsi disini</string>
+    <string name="upload">Unggah</string>
 </resources>

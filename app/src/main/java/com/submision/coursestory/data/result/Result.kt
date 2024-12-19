@@ -1,4 +1,4 @@
-package com.submision.coursestory.data
+package com.submision.coursestory.data.result
 
 sealed class Result<out T> {
     data class Success<out T>(val data: T) : Result<T>()

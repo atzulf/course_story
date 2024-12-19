@@ -2,8 +2,8 @@ package com.submision.coursestory.view.login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.submision.coursestory.data.UserRepository
-import com.submision.coursestory.data.Result
+import com.submision.coursestory.data.repository.UserRepository
+import com.submision.coursestory.data.result.Result
 import com.submision.coursestory.data.pref.UserModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

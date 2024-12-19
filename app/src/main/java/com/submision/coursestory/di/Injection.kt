@@ -1,7 +1,7 @@
 package com.submision.coursestory.di
 
 import android.content.Context
-import com.submision.coursestory.data.UserRepository
+import com.submision.coursestory.data.repository.UserRepository
 import com.submision.coursestory.data.api.ApiConfig
 import com.submision.coursestory.data.pref.UserPreference
 import com.submision.coursestory.data.pref.dataStore

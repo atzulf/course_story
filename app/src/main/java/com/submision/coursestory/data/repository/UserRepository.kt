@@ -1,9 +1,7 @@
-package com.submision.coursestory.data
+package com.submision.coursestory.data.repository
 
 import android.util.Log
-import com.google.gson.Gson
 import com.submision.coursestory.data.api.ApiService
-import com.submision.coursestory.data.pref.UserModel
 import com.submision.coursestory.data.pref.UserPreference
 import com.submision.coursestory.data.response.AllStoriesResponse
 import com.submision.coursestory.data.response.LoginResponse

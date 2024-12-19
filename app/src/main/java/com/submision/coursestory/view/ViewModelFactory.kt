@@ -3,7 +3,7 @@ package com.submision.coursestory.view
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.submision.coursestory.data.UserRepository
+import com.submision.coursestory.data.repository.UserRepository
 import com.submision.coursestory.di.Injection
 import com.submision.coursestory.view.detail.DetailStoryViewModel
 import com.submision.coursestory.view.login.LoginViewModel

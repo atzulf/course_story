@@ -10,6 +10,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.submision.coursestory.R
+import com.submision.coursestory.data.result.Result
 import com.submision.coursestory.databinding.ActivityLoginBinding
 import com.submision.coursestory.view.main.MainActivity
 import kotlinx.coroutines.launch
@@ -70,11 +71,11 @@ class LoginActivity : AppCompatActivity() {
             lifecycleScope.launch {
                 viewModel.loginState.collect { state ->
                     when (state) {
-                        is com.submision.coursestory.data.Result.Loading -> {
+                        is Result.Loading -> {
                             // Menampilkan progress bar saat login sedang berlangsung
                             binding.progressBar.visibility = android.view.View.VISIBLE
                         }
-                        is com.submision.coursestory.data.Result.Success -> {
+                        is Result.Success -> {
                             // Sembunyikan progress bar dan tampilkan dialog sukses
                             binding.progressBar.visibility = android.view.View.GONE
                             AlertDialog.Builder(this@LoginActivity).apply {
@@ -91,7 +92,7 @@ class LoginActivity : AppCompatActivity() {
                                 show()
                             }
                         }
-                        is com.submision.coursestory.data.Result.Error -> {
+                        is Result.Error -> {
                             // Sembunyikan progress bar dan tampilkan dialog error
                             binding.progressBar.visibility = android.view.View.GONE
                             AlertDialog.Builder(this@LoginActivity).apply {

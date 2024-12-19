@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
-import com.submision.coursestory.data.UserRepository
+import com.submision.coursestory.data.repository.UserRepository
 import com.submision.coursestory.data.response.ListStoryItem
 import kotlinx.coroutines.launch
 

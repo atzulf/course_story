@@ -15,6 +15,7 @@ import com.submision.coursestory.databinding.ActivityMainBinding
 import com.submision.coursestory.view.welcome.WelcomeActivity
 import com.submision.coursestory.data.response.ListStoryItem
 import com.submision.coursestory.view.detail.DetailStoryActivity
+import com.submision.coursestory.view.upload.UploadActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -47,6 +48,8 @@ class MainActivity : AppCompatActivity() {
         // Mengatur tampilan dan aksi tombol logout
         setupView()
         setupAction()
+
+        kliktoupload()
 
         // Memuat cerita dari ViewModel
         viewModel.fetchStories()
@@ -98,4 +101,12 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this, "Logged out successfully", Toast.LENGTH_SHORT).show()
         }
     }
+
+    private fun kliktoupload() {
+        binding.fab.setOnClickListener {
+            val intent = Intent(this, UploadActivity::class.java)
+            startActivity(intent)
+        }
+    }
+
 }

@@ -10,6 +10,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.submision.coursestory.R
+import com.submision.coursestory.data.result.Result
 import com.submision.coursestory.databinding.ActivitySignupBinding
 import com.submision.coursestory.view.login.LoginActivity
 import kotlinx.coroutines.launch
@@ -74,10 +75,10 @@ class SignupActivity : AppCompatActivity() {
             lifecycleScope.launch {
                 viewModel.registerState.collect { state ->
                     when (state) {
-                        is com.submision.coursestory.data.Result.Loading -> {
+                        is Result.Loading -> {
                             binding.progressBar.visibility = android.view.View.VISIBLE
                         }
-                        is com.submision.coursestory.data.Result.Success -> {
+                        is Result.Success -> {
                             binding.progressBar.visibility = android.view.View.GONE
                             AlertDialog.Builder(this@SignupActivity).apply {
                                 setTitle("Yeah!")
@@ -94,7 +95,7 @@ class SignupActivity : AppCompatActivity() {
                                 show()
                             }
                         }
-                        is com.submision.coursestory.data.Result.Error -> {
+                        is Result.Error -> {
                             binding.progressBar.visibility = android.view.View.GONE
                             AlertDialog.Builder(this@SignupActivity).apply {
                                 setTitle("Oops!")
