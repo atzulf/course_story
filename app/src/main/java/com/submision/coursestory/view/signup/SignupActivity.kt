@@ -27,6 +27,7 @@ class SignupActivity : AppCompatActivity() {
         binding = ActivitySignupBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        toLogin()
         setupView()
         setupAction()
     }
@@ -111,4 +112,13 @@ class SignupActivity : AppCompatActivity() {
             }
         }
     }
+
+    private fun toLogin() {
+        binding.loginTextView.setOnClickListener {
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+    }
+
 }

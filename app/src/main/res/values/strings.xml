@@ -23,4 +23,6 @@
     <string name="gallery">Upload Galeri</string>
     <string name="description">Tambahkan Deskripsi disini</string>
     <string name="upload">Unggah</string>
+    <string name="register_to_login">Sudah ada akun? Klik disini</string>
+    <string name="login_to_register">Belum punya Akun? Klik disini</string>
 </resources>

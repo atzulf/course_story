@@ -13,6 +13,7 @@ import com.submision.coursestory.R
 import com.submision.coursestory.data.result.Result
 import com.submision.coursestory.databinding.ActivityLoginBinding
 import com.submision.coursestory.view.main.MainActivity
+import com.submision.coursestory.view.signup.SignupActivity
 import kotlinx.coroutines.launch
 
 class LoginActivity : AppCompatActivity() {
@@ -28,6 +29,7 @@ class LoginActivity : AppCompatActivity() {
 
         setupView()
         setupAction()
+        toSignUp()
     }
 
     private fun setupView() {
@@ -109,4 +111,12 @@ class LoginActivity : AppCompatActivity() {
             }
         }
     }
+
+    private fun toSignUp() {
+        binding.registerTextView.setOnClickListener {
+            val intent = Intent(this, SignupActivity::class.java)
+            startActivity(intent)
+        }
+    }
+
 }
