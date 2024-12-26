@@ -11,15 +11,15 @@ Proyek ini dikembangkan sebagai bagian dari **learning path Mobile Development A
 - **Login Register**: Fitur Welcome Screen beserta Login Register pada Aplikasi
 - **Main Activity**: Pengguna dapat berinteraksi, berdiskusi, dan berbagi ide melalui berbagai postingan foto yang diunggah.
 - **Maps Location**: Dibangun menggunakan Google Maps API berfungsi untuk melihat Lokasi dari para pengguna Aplikasi yang ditampilkan menggunakan Location Marker
-- **Proses Belajar yang Dipersonalisasi**: Rekomendasi kursus berdasarkan preferensi pengguna.
+- **Infinity Scroll**: Penggunaan Paging 3 yang berfungsi untuk Infinity Scroll pada aplikasi layaknya Sosial Media pada umumnya
 
 ## Teknologi yang Digunakan
 
 - **Platform**: Android (Kotlin)
-- **Framework UI**: Jetpack Compose / XML Layouts
-- **Database**: Room / Firebase Realtime Database
+- **Framework UI**: XML Layouts
+- **Database**: Room, User Preference, DAO
 - **API**: Retrofit untuk komunikasi API
-- **Cloud Services**: Google Cloud Platform untuk integrasi layanan
+- **Unit Test**: Unit Test dan UI Test menggunakan Mock pada ViewModel
 
 ## Instalasi dan Setup
 
