@@ -35,6 +35,7 @@ Jika Anda memiliki pertanyaan atau masukan, silakan hubungi saya melalui:
 - **GitHub:** [github.com/atzulf](https://github.com/atzulf)  
 
 ## 📸 Tampilan Aplikasi
+![banner 1](https://github.com/user-attachments/assets/79016e78-4294-48c4-aae6-475e3ba9a2ba)
 
 
 ## 🤝 Kontribusi  
