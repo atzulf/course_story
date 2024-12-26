@@ -1,6 +1,6 @@
 # Course Story
 
-**Course Story** adalah proyek submission untuk **intermediate Bangkit batch 2 tahun 2024**. Proyek ini adalah platform pembelajaran interaktif yang memungkinkan pengguna untuk berbagi dan mengikuti kursus dalam berbagai bidang. Dengan fokus pada aksesibilitas, keterlibatan pengguna, dan pembelajaran berbasis komunitas, Course Story bertujuan untuk meningkatkan pengalaman pembelajaran online.
+**Course Story** adalah proyek Aplikasi submission untuk **intermediate Bangkit batch 2 tahun 2024**. Proyek ini adalah platform pembelajaran interaktif yang memungkinkan pengguna untuk berbagi foto dengan deskripsi tiap kegiatan dilengkapi dengan Fitur Lokasi menggunakan Api Google Maps, Course Story bertujuan untuk meningkatkan pengalaman pembelajaran online serta pembelajaran lebih lanjut mengenai Pemahaman Android Development.
 
 ## Learning Path
 
@@ -9,8 +9,8 @@ Proyek ini dikembangkan sebagai bagian dari **learning path Mobile Development A
 ## Fitur Utama
 
 - **Login Register**: Fitur Welcome Screen beserta Login Register pada Aplikasi
-- **Pembelajaran Berbasis Komunitas**: Pengguna dapat berinteraksi, berdiskusi, dan berbagi ide.
-- **Desain Responsif dan Intuitif**: Dibangun menggunakan prinsip desain material untuk pengalaman pengguna yang optimal.
+- **Main Activity**: Pengguna dapat berinteraksi, berdiskusi, dan berbagi ide melalui berbagai postingan foto yang diunggah.
+- **Maps Location**: Dibangun menggunakan Google Maps API berfungsi untuk melihat Lokasi dari para pengguna Aplikasi yang ditampilkan menggunakan Location Marker
 - **Proses Belajar yang Dipersonalisasi**: Rekomendasi kursus berdasarkan preferensi pengguna.
 
 ## Teknologi yang Digunakan
