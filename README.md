@@ -2,6 +2,9 @@
 
 **Course Story** adalah proyek aplikasi submission untuk **intermediate Bangkit batch 2 tahun 2024**. Proyek ini adalah platform pembelajaran interaktif yang memungkinkan pengguna untuk berbagi foto dengan deskripsi tiap kegiatan, dilengkapi dengan fitur lokasi menggunakan Google Maps API. **Course Story** bertujuan untuk meningkatkan pengalaman pembelajaran online serta memberikan pemahaman lebih lanjut mengenai pengembangan Android.
 
+## 📸 Tampilan Aplikasi
+![banner 1](https://github.com/user-attachments/assets/79016e78-4294-48c4-aae6-475e3ba9a2ba)
+
 ## 🎯 Learning Path
 
 Proyek ini dikembangkan sebagai bagian dari **learning path Mobile Development Android**. Aplikasi ini dirancang untuk berjalan pada platform Android dengan implementasi teknologi modern untuk memastikan performa, skalabilitas, dan pengalaman pengguna yang optimal.
@@ -33,10 +36,6 @@ Jika Anda memiliki pertanyaan atau masukan, silakan hubungi saya melalui:
 - **LinkedIn:** [linkedin.com/in/ataka-dzulfikar](https://linkedin.com/in/ataka-dzulfikar)  
 - **Instagram:** [@atakazulfikar](https://instagram.com/atakazulfikar)  
 - **GitHub:** [github.com/atzulf](https://github.com/atzulf)  
-
-## 📸 Tampilan Aplikasi
-![banner 1](https://github.com/user-attachments/assets/79016e78-4294-48c4-aae6-475e3ba9a2ba)
-
 
 ## 🤝 Kontribusi  
 Kontribusi selalu diterima! Jika Anda ingin menambahkan fitur atau memperbaiki bug, silakan buat *pull request* atau kirimkan *issue* di repository ini.  
